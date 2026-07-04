@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>せかいの国旗パズルゲーム</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="game" aria-live="polite">
+      <section class="desk" aria-label="国旗パズルゲーム">
+        <section class="home-screen" id="homeScreen" aria-label="トップ画面">
+          <div class="home-title">
+            <span class="title-small">せかいの</span>
+            <h1>国旗パズル</h1>
+            <span class="title-small">Mystery Flag Puzzle</span>
+          </div>
+
+          <div class="home-actions">
+            <button class="start-button" id="startButton" type="button">チャレンジする</button>
+            <button class="help-button help-button-large" id="homeRulesButton" type="button" aria-label="ルールを見る" title="ルールを見る">?</button>
+          </div>
+
+          <div class="level-select-title">つぎのパズル</div>
+          <div class="level-list next-challenge" id="levelList"></div>
+          <div class="difficulty-road" id="difficultyRoad" aria-label="難易度の進み方"></div>
+        </section>
+
+        <section class="play-screen" id="playScreen" aria-label="プレイ画面" hidden>
+          <div class="top-ui">
+            <button class="icon-button" id="homeButton" type="button" aria-label="トップへ戻る" title="トップへ戻る">
+              <span aria-hidden="true">⌂</span>
+            </button>
+            <div class="country-pill" id="countryName">
+              <span class="country-ja">メキシコ</span>
+              <span class="country-en">Mexico</span>
+            </div>
+            <div class="point-pill" aria-label="ポイント" title="ポイント">
+              <span class="point-badge" aria-hidden="true"></span>
+              <span id="pointCount">0</span>
+            </div>
+          </div>
+
+          <div class="level-row">
+            <div class="level-chip" id="levelChip">STAGE 1</div>
+            <button class="help-button" id="rulesButton" type="button" aria-label="ルールを見る" title="ルールを見る">?</button>
+          </div>
+
+          <div class="timer-pill" aria-label="残り時間">
+            <span class="clock" aria-hidden="true"></span>
+            <span id="timer">20s</span>
+          </div>
+
+          <div class="flag-stage">
+            <div class="tray">
+              <div class="flag-board" id="flagBoard"></div>
+            </div>
+          </div>
+
+          <div class="parts-zone" id="partsZone" aria-label="候補パーツ"></div>
+
+          <div class="hint-pill" id="message">パーツをタップして国旗を完成させよう</div>
+          <button class="continue-button" id="continueButton" type="button" hidden>つぎへ</button>
+        </section>
+
+        <dialog class="result-dialog" id="resultDialog">
+          <div class="result-title" id="resultTitle">クリア！</div>
+          <p id="resultText">よくできました。</p>
+          <div class="result-actions">
+            <button class="secondary-button" id="closeDialogButton" type="button">つづける</button>
+            <button class="primary-button" id="nextButton" type="button">次の国旗</button>
+          </div>
+        </dialog>
+
+        <dialog class="rules-dialog" id="rulesDialog">
+          <div class="result-title">ルール</div>
+          <p>国名に合うパーツを全部タップして、国旗を完成させます。</p>
+          <p>正しいパーツは +1 ポイント。クリア時は残り時間ボーナスが入ります。</p>
+          <p>ポイントはスコアです。最後まで進むとランクが出ます。</p>
+          <div class="result-actions">
+            <button class="primary-button" id="closeRulesButton" type="button">OK</button>
+          </div>
+        </dialog>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
