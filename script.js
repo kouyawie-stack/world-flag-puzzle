@@ -226,6 +226,125 @@ const rulesDialog = document.querySelector("#rulesDialog");
 const rulesButton = document.querySelector("#rulesButton");
 const homeRulesButton = document.querySelector("#homeRulesButton");
 const closeRulesButton = document.querySelector("#closeRulesButton");
+const soundToggle = document.querySelector("#soundToggle");
+
+let soundEnabled = true;
+let audioContext;
+let masterGain;
+let musicGain;
+let musicTimer;
+let musicStep = 0;
+
+function ensureAudio() {
+  if (!soundEnabled) return false;
+
+  if (!audioContext) {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return false;
+
+    audioContext = new AudioContextClass();
+    masterGain = audioContext.createGain();
+    musicGain = audioContext.createGain();
+    masterGain.gain.value = 0.34;
+    musicGain.gain.value = 0.2;
+    musicGain.connect(masterGain);
+    masterGain.connect(audioContext.destination);
+  }
+
+  if (audioContext.state === "suspended") {
+    audioContext.resume();
+  }
+
+  startMusic();
+  return true;
+}
+
+function startMusic() {
+  if (!soundEnabled || !audioContext || musicTimer) return;
+
+  playMusicStep();
+  musicTimer = setInterval(playMusicStep, 480);
+}
+
+function stopMusic() {
+  if (!musicTimer) return;
+  clearInterval(musicTimer);
+  musicTimer = undefined;
+}
+
+function playMusicStep() {
+  if (!soundEnabled || !audioContext || !musicGain) return;
+
+  const notes = [392, 493.88, 587.33, 659.25, 587.33, 493.88, 440, 523.25];
+  const bass = [196, 196, 246.94, 246.94, 220, 220, 261.63, 261.63];
+  const now = audioContext.currentTime;
+  playTone(notes[musicStep % notes.length], now, 0.16, "triangle", 0.06, musicGain);
+  if (musicStep % 2 === 0) {
+    playTone(bass[musicStep % bass.length], now, 0.2, "sine", 0.035, musicGain);
+  }
+  musicStep += 1;
+}
+
+function playSfx(type) {
+  if (!ensureAudio()) return;
+
+  const now = audioContext.currentTime;
+  if (type === "correct") {
+    playTone(660, now, 0.08, "triangle", 0.16);
+    playTone(880, now + 0.07, 0.11, "triangle", 0.14);
+  } else if (type === "wrong") {
+    playTone(180, now, 0.11, "sawtooth", 0.12);
+    playTone(140, now + 0.08, 0.12, "sawtooth", 0.1);
+  } else if (type === "clear") {
+    [523.25, 659.25, 783.99, 1046.5].forEach((note, index) => {
+      playTone(note, now + index * 0.08, 0.16, "triangle", 0.14);
+    });
+  } else if (type === "timeup") {
+    [330, 247, 196].forEach((note, index) => {
+      playTone(note, now + index * 0.12, 0.18, "sawtooth", 0.1);
+    });
+  } else if (type === "tick") {
+    playTone(900, now, 0.035, "square", 0.06);
+  } else {
+    playTone(520, now, 0.06, "triangle", 0.08);
+  }
+}
+
+function playTone(frequency, start, duration, type = "sine", volume = 0.1, destination = masterGain) {
+  if (!audioContext || !destination) return;
+
+  const oscillator = audioContext.createOscillator();
+  const gain = audioContext.createGain();
+  oscillator.type = type;
+  oscillator.frequency.setValueAtTime(frequency, start);
+  gain.gain.setValueAtTime(0.0001, start);
+  gain.gain.exponentialRampToValueAtTime(volume, start + 0.015);
+  gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+  oscillator.connect(gain);
+  gain.connect(destination);
+  oscillator.start(start);
+  oscillator.stop(start + duration + 0.03);
+}
+
+function toggleSound() {
+  soundEnabled = !soundEnabled;
+  updateSoundButton();
+
+  if (soundEnabled) {
+    ensureAudio();
+    playSfx("button");
+  } else {
+    stopMusic();
+  }
+}
+
+function updateSoundButton() {
+  soundToggle.classList.toggle("muted", !soundEnabled);
+  soundToggle.classList.toggle("active", soundEnabled);
+  soundToggle.setAttribute("aria-pressed", String(soundEnabled));
+  soundToggle.setAttribute("aria-label", soundEnabled ? "音を切る" : "音を鳴らす");
+  soundToggle.title = soundEnabled ? "音を切る" : "音を鳴らす";
+}
 
 function createLevel(plan, index) {
   const slots = plan.pieces.map((item, pieceIndex) => ({
@@ -292,6 +411,7 @@ function renderDifficultyRoad(activeKey) {
 
 function showHome() {
   clearInterval(timerId);
+  playSfx("button");
   if (resultDialog.open) resultDialog.close();
   if (rulesDialog.open) rulesDialog.close();
   homeScreen.hidden = false;
@@ -300,6 +420,8 @@ function showHome() {
 }
 
 function startLevel(index, resetPoints) {
+  ensureAudio();
+  playSfx("button");
   levelIndex = index;
   if (resetPoints) points = 0;
   homeScreen.hidden = true;
@@ -402,13 +524,16 @@ function choosePart(button) {
       pointCount.textContent = points;
       message.textContent = `完成！ ${level.country} / ${level.english}`;
       continueButton.hidden = false;
+      playSfx("clear");
     } else {
+      playSfx("correct");
       updateMessage();
     }
   } else {
     remaining = Math.max(0, remaining - 3);
     timer.textContent = `${remaining}s`;
     message.textContent = "そのパーツは使わないよ";
+    playSfx("wrong");
     shake(button);
     if (remaining === 0) finishTimeUp();
   }
@@ -446,6 +571,7 @@ function startTimer() {
     if (solved) return;
     remaining -= 1;
     timer.textContent = `${remaining}s`;
+    if (remaining > 0 && remaining <= 5) playSfx("tick");
     if (remaining <= 0) finishTimeUp();
   }, 1000);
 }
@@ -456,10 +582,12 @@ function finishTimeUp() {
   remaining = 0;
   timer.textContent = "0s";
   message.textContent = "タイムアップ。もう一度チャレンジ！";
+  playSfx("timeup");
   showResult(false);
 }
 
 function showResult(success) {
+  if (success) playSfx("button");
   const isFinalLevel = levelIndex === levels.length - 1;
   resultTitle.textContent = success ? "クリア！" : "タイムアップ";
   if (success && isFinalLevel) {
@@ -558,9 +686,23 @@ startButton.addEventListener("click", () => startLevel(getNextLevelIndex(selecte
 homeButton.addEventListener("click", showHome);
 continueButton.addEventListener("click", () => showResult(true));
 nextButton.addEventListener("click", nextLevel);
-closeDialogButton.addEventListener("click", () => resultDialog.close());
-rulesButton.addEventListener("click", () => rulesDialog.showModal());
-homeRulesButton.addEventListener("click", () => rulesDialog.showModal());
-closeRulesButton.addEventListener("click", () => rulesDialog.close());
+closeDialogButton.addEventListener("click", () => {
+  playSfx("button");
+  resultDialog.close();
+});
+rulesButton.addEventListener("click", () => {
+  playSfx("button");
+  rulesDialog.showModal();
+});
+homeRulesButton.addEventListener("click", () => {
+  playSfx("button");
+  rulesDialog.showModal();
+});
+closeRulesButton.addEventListener("click", () => {
+  playSfx("button");
+  rulesDialog.close();
+});
+soundToggle.addEventListener("click", toggleSound);
 
+updateSoundButton();
 renderHome();
