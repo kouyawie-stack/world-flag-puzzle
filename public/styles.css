@@ -1182,7 +1182,8 @@ button {
 
 .sym-red-disc,
 .sym-blue-disc,
-.sym-yellow-disc {
+.sym-yellow-disc,
+.sym-white-disc {
   border-radius: 50%;
 }
 
@@ -1196,6 +1197,10 @@ button {
 
 .sym-yellow-disc {
   background: #f4b22a;
+}
+
+.sym-white-disc {
+  background: #fff;
 }
 
 .sym-sun,
@@ -1355,7 +1360,8 @@ button {
 .shape-triangle-blue,
 .shape-triangle-red,
 .shape-triangle-green,
-.shape-triangle-black {
+.shape-triangle-black,
+.shape-triangle-yellow {
   clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
 
@@ -1373,6 +1379,10 @@ button {
 
 .shape-triangle-green {
   background: #138a57;
+}
+
+.shape-triangle-yellow {
+  background: #ffd735;
 }
 
 .shape-triangle-black {
