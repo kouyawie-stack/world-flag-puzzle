@@ -1417,14 +1417,10 @@ button {
 }
 
 .canton-blue-stars {
-  background:
-    radial-gradient(circle at 20% 22%, #fff 0 5%, transparent 6%),
-    radial-gradient(circle at 42% 22%, #fff 0 5%, transparent 6%),
-    radial-gradient(circle at 64% 22%, #fff 0 5%, transparent 6%),
-    radial-gradient(circle at 30% 45%, #fff 0 5%, transparent 6%),
-    radial-gradient(circle at 52% 45%, #fff 0 5%, transparent 6%),
-    radial-gradient(circle at 74% 45%, #fff 0 5%, transparent 6%),
-    #1756b8;
+  background-color: #1756b8;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='18' viewBox='0 0 20 18' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23fff' d='M10 1.2l2.1 5h5.3l-4.2 3.2 1.6 5.2L10 11.5l-4.8 3.1 1.6-5.2-4.2-3.2h5.3z'/%3E%3C/svg%3E");
+  background-size: 19% 24%;
+  background-position: 6% 8%;
 }
 
 .stars-strip {
