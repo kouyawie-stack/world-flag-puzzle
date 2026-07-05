@@ -37,9 +37,14 @@ const artLabels = {
   "sym-sun": "太陽",
   "sym-blue-wheel": "青い車輪",
   "sym-eagle": "ワシの紋章",
+  "spain-emblem": "スペインの紋章",
+  "brazil-globe": "ブラジルの青い円",
+  "portugal-emblem": "ポルトガルの紋章",
+  "ethiopia-emblem": "エチオピアの星",
   "sym-maple": "カエデの葉",
   "sym-crescent": "三日月と星",
   "sym-taegeuk": "太極マーク",
+  "sym-david-star": "青い六芒星",
   "sym-trigram-a": "左上の黒い線",
   "sym-trigram-b": "右上の黒い線",
   "sym-trigram-c": "左下の黒い線",
@@ -62,7 +67,9 @@ const artLabels = {
   "nordic-yellow": "黄色い北欧十字",
   "nordic-red": "赤い北欧十字",
   "canton-blue-stars": "星のある青い四角",
+  "china-stars": "小さな黄色い星",
   "stars-strip": "白い星",
+  "morocco-star": "緑の星",
   "script-sword": "文字と剣のしるし",
 };
 
@@ -88,12 +95,14 @@ const positions = [
   { x: "5%", y: "2%", size: "74px", rotate: "-10deg" },
   { x: "38%", y: "0%", size: "76px", rotate: "8deg" },
   { x: "70%", y: "6%", size: "74px", rotate: "13deg" },
-  { x: "13%", y: "48%", size: "82px", rotate: "-18deg" },
-  { x: "43%", y: "45%", size: "80px", rotate: "12deg" },
-  { x: "70%", y: "48%", size: "88px", rotate: "-9deg" },
-  { x: "2%", y: "58%", size: "86px", rotate: "16deg" },
-  { x: "29%", y: "62%", size: "74px", rotate: "-4deg" },
-  { x: "58%", y: "64%", size: "76px", rotate: "7deg" },
+  { x: "1%", y: "36%", size: "76px", rotate: "16deg" },
+  { x: "27%", y: "35%", size: "78px", rotate: "-8deg" },
+  { x: "54%", y: "37%", size: "78px", rotate: "10deg" },
+  { x: "76%", y: "36%", size: "76px", rotate: "-14deg" },
+  { x: "6%", y: "68%", size: "74px", rotate: "-16deg" },
+  { x: "31%", y: "68%", size: "74px", rotate: "7deg" },
+  { x: "56%", y: "68%", size: "74px", rotate: "-5deg" },
+  { x: "78%", y: "68%", size: "74px", rotate: "12deg" },
 ];
 
 const v3 = (a, b, c) => [
@@ -131,10 +140,10 @@ const countryPlans = [
     pieces: [
       ...field("c-white"),
       ...center("sym-taegeuk", 20),
-      piece("sym-trigram-a", 18, 18, 17, 20, 2),
-      piece("sym-trigram-b", 65, 18, 17, 20, 2),
-      piece("sym-trigram-c", 18, 62, 17, 20, 2),
-      piece("sym-trigram-d", 65, 62, 17, 20, 2),
+      piece("sym-trigram-a", 20, 18, 16, 18, 2),
+      piece("sym-trigram-b", 64, 18, 16, 18, 2),
+      piece("sym-trigram-c", 20, 64, 16, 18, 2),
+      piece("sym-trigram-d", 64, 64, 16, 18, 2),
     ],
   },
   { country: "アルゼンチン", english: "Argentina", pieces: [...h3("c-sky", "c-white", "c-sky"), ...center("sym-sun", 14)] },
@@ -144,10 +153,10 @@ const countryPlans = [
   { country: "ドイツ", english: "Germany", pieces: h3("c-black", "c-red", "c-yellow") },
   { country: "オランダ", english: "Netherlands", pieces: h3("c-red", "c-white", "c-blue") },
   { country: "ロシア", english: "Russia", pieces: h3("c-white", "c-blue", "c-red") },
-  { country: "スペイン", english: "Spain", pieces: [piece("c-red", 0, 0, 100, 25), piece("c-yellow", 0, 25, 100, 50), piece("c-red", 0, 75, 100, 25)] },
-  { country: "ブラジル", english: "Brazil", pieces: [...field("c-green"), piece("shape-diamond-yellow", 20, 16, 60, 68, 2), ...center("sym-blue-disc", 22)] },
+  { country: "スペイン", english: "Spain", pieces: [piece("c-red", 0, 0, 100, 25), piece("c-yellow", 0, 25, 100, 50), piece("c-red", 0, 75, 100, 25), piece("spain-emblem", 23, 38, 12, 24, 2)] },
+  { country: "ブラジル", english: "Brazil", pieces: [...field("c-green"), piece("shape-diamond-yellow", 20, 16, 60, 68, 2), ...center("brazil-globe", 22)] },
   { country: "カナダ", english: "Canada", pieces: [piece("c-red", 0, 0, 25, 100), piece("c-white", 25, 0, 50, 100), piece("c-red", 75, 0, 25, 100), ...center("sym-maple", 24)] },
-  { country: "中国", english: "China", pieces: [...field("c-red"), piece("sym-star", 9, 12, 22, 24, 2), piece("stars-strip", 30, 10, 22, 28, 2)] },
+  { country: "中国", english: "China", pieces: [...field("c-red"), piece("sym-star", 9, 12, 22, 24, 2), piece("china-stars", 30, 10, 22, 28, 2)] },
   { country: "アメリカ", english: "United States", pieces: [piece("stripe-reds", 0, 0, 100, 100), piece("canton-blue-stars", 0, 0, 43, 54, 2)] },
   { country: "インド", english: "India", pieces: [...h3("c-orange", "c-white", "c-green"), ...center("sym-blue-wheel", 15)] },
   { country: "インドネシア", english: "Indonesia", pieces: h2("c-red", "c-white") },
@@ -159,7 +168,7 @@ const countryPlans = [
   { country: "フィンランド", english: "Finland", pieces: [...field("c-white"), piece("nordic-blue", 0, 0, 100, 100, 2)] },
   { country: "ノルウェー", english: "Norway", pieces: [...field("c-red"), piece("nordic-white", 0, 0, 100, 100, 2), piece("nordic-blue", 0, 0, 100, 100, 3)] },
   { country: "トルコ", english: "Turkey", pieces: [...field("c-red"), piece("sym-crescent", 32, 30, 30, 40, 2)] },
-  { country: "モロッコ", english: "Morocco", pieces: [...field("c-deep-red"), ...center("sym-green-star", 24)] },
+  { country: "モロッコ", english: "Morocco", pieces: [...field("c-deep-red"), ...center("morocco-star", 24)] },
   { country: "バングラデシュ", english: "Bangladesh", pieces: [...field("c-deep-green"), piece("sym-red-disc", 37, 32, 25, 36, 2)] },
   { country: "パキスタン", english: "Pakistan", pieces: [piece("c-white", 0, 0, 25, 100), piece("c-deep-green", 25, 0, 75, 100), piece("sym-crescent", 50, 29, 28, 40, 2)] },
   { country: "アイルランド", english: "Ireland", pieces: v3("c-green", "c-white", "c-orange") },
@@ -168,20 +177,20 @@ const countryPlans = [
   { country: "ナイジェリア", english: "Nigeria", pieces: v3("c-green", "c-white", "c-green") },
   { country: "タイ", english: "Thailand", pieces: [piece("c-red", 0, 0, 100, 16), piece("c-white", 0, 16, 100, 16), piece("c-navy", 0, 32, 100, 36), piece("c-white", 0, 68, 100, 16), piece("c-red", 0, 84, 100, 16)] },
   { country: "フィリピン", english: "Philippines", pieces: [piece("c-blue", 0, 0, 100, 50), piece("c-red", 0, 50, 100, 50), piece("shape-triangle-white", 0, 0, 42, 100, 2), piece("sym-sun", 11, 40, 12, 20, 3)] },
-  { country: "ポルトガル", english: "Portugal", pieces: [piece("c-green", 0, 0, 40, 100), piece("c-red", 40, 0, 60, 100), piece("sym-yellow-disc", 33, 35, 16, 30, 2)] },
+  { country: "ポルトガル", english: "Portugal", pieces: [piece("c-green", 0, 0, 40, 100), piece("c-red", 40, 0, 60, 100), piece("portugal-emblem", 32, 34, 18, 32, 2)] },
   { country: "コロンビア", english: "Colombia", pieces: [piece("c-yellow", 0, 0, 100, 50), piece("c-blue", 0, 50, 100, 25), piece("c-red", 0, 75, 100, 25)] },
   { country: "チリ", english: "Chile", pieces: [piece("c-white", 0, 0, 100, 50), piece("c-red", 0, 50, 100, 50), piece("c-blue", 0, 0, 34, 50, 2), piece("sym-white-star", 10, 11, 14, 24, 3)] },
   { country: "チェコ", english: "Czechia", pieces: [piece("c-white", 0, 0, 100, 50), piece("c-red", 0, 50, 100, 50), piece("shape-triangle-blue", 0, 0, 44, 100, 2)] },
   { country: "キューバ", english: "Cuba", pieces: [piece("stripe-blue-white", 0, 0, 100, 100), piece("shape-triangle-red", 0, 0, 42, 100, 2), piece("sym-white-star", 10, 38, 14, 24, 3)] },
   { country: "ジャマイカ", english: "Jamaica", pieces: [...field("c-green"), piece("shape-diagonal-yellow", 0, 0, 100, 100, 2), piece("shape-triangle-black", 0, 0, 100, 100, 3)] },
-  { country: "イスラエル", english: "Israel", pieces: [piece("c-white", 0, 0, 100, 100), piece("c-blue", 0, 12, 100, 10, 2), piece("c-blue", 0, 78, 100, 10, 2), ...center("sym-blue-star", 24)] },
+  { country: "イスラエル", english: "Israel", pieces: [piece("c-white", 0, 0, 100, 100), piece("c-blue", 0, 12, 100, 10, 2), piece("c-blue", 0, 78, 100, 10, 2), ...center("sym-david-star", 24)] },
   { country: "サウジアラビア", english: "Saudi Arabia", pieces: [...field("c-deep-green"), piece("script-sword", 28, 29, 44, 42, 2)] },
   { country: "シンガポール", english: "Singapore", pieces: [piece("c-red", 0, 0, 100, 50), piece("c-white", 0, 50, 100, 50), piece("sym-crescent", 12, 12, 24, 28, 2), piece("stars-strip", 35, 12, 23, 26, 2)] },
   { country: "マレーシア", english: "Malaysia", pieces: [piece("stripe-red-white", 0, 0, 100, 100), piece("c-blue", 0, 0, 44, 54, 2), piece("sym-crescent", 9, 11, 22, 30, 3), piece("sym-star", 28, 17, 12, 18, 3)] },
   { country: "ガーナ", english: "Ghana", pieces: [...h3("c-red", "c-yellow", "c-green"), ...center("sym-black-star", 18)] },
   { country: "ケニア", english: "Kenya", pieces: [piece("c-black", 0, 0, 100, 30), piece("c-white", 0, 30, 100, 5), piece("c-red", 0, 35, 100, 30), piece("c-white", 0, 65, 100, 5), piece("c-green", 0, 70, 100, 30), ...center("sym-shield", 18)] },
   { country: "タンザニア", english: "Tanzania", pieces: [piece("c-green", 0, 0, 100, 100), piece("shape-diagonal-yellow", 0, 0, 100, 100, 2), piece("shape-diagonal-black", 0, 0, 100, 100, 3), piece("shape-triangle-blue", 55, 35, 45, 65, 1)] },
-  { country: "エチオピア", english: "Ethiopia", pieces: [...h3("c-green", "c-yellow", "c-red"), ...center("sym-blue-disc", 20)] },
+  { country: "エチオピア", english: "Ethiopia", pieces: [...h3("c-green", "c-yellow", "c-red"), ...center("ethiopia-emblem", 20)] },
 ];
 
 const levels = countryPlans
@@ -377,9 +386,10 @@ function createLevel(plan, index) {
     id: `${index}-${pieceIndex}-${item.art}`,
   }));
   const usedArts = new Set(slots.map((item) => item.art));
+  const distractorLimit = Math.min(4, Math.max(0, positions.length - slots.length));
   const distractors = distractorArts
     .filter((art) => !usedArts.has(art))
-    .slice(index % 5, index % 5 + 4)
+    .slice(index % 5, index % 5 + distractorLimit)
     .map((art, distractorIndex) => ({
       id: `${index}-decoy-${distractorIndex}-${art}`,
       art,
