@@ -23,11 +23,13 @@ This is a personal project published from `kouyawie-stack/world-flag-puzzle`.
   - `public/index.html`
   - `public/styles.css`
   - `public/script.js`
+- If `styles.css` or `script.js` changes, bump the cache-busting version in both `index.html` and `public/index.html`.
 - Do not add external audio or image assets unless explicitly requested. Prefer self-contained CSS/Web Audio when possible.
 
 ## Verification
 
 - Run `node --check script.js` after JavaScript changes.
+- Run `node scripts/check-release.mjs` before committing/publishing. This catches stale CSS/JS cache versions and root/public drift.
 - Check the local file URL in a mobile-sized viewport when UI changes are made.
 - For mobile audio changes, remember that iPhone Safari requires sound to start from a user gesture.
 
