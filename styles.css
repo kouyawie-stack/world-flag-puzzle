@@ -1286,30 +1286,15 @@ button {
 }
 
 .sym-crescent {
-  color: #fff;
+  background: center / contain no-repeat url("data:image/svg+xml,%3Csvg width='120' height='90' viewBox='0 0 120 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23fff' fill-rule='evenodd' d='M54 13a32 32 0 1 0 0 64 34 34 0 1 1 0-64z'/%3E%3C/svg%3E");
 }
 
-.sym-crescent::before {
-  content: "";
-  position: absolute;
-  left: 7%;
-  top: 12%;
-  width: 58%;
-  height: 76%;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 13px 0 0 #e82936;
+.sym-crescent-star {
+  background: center / contain no-repeat url("data:image/svg+xml,%3Csvg width='120' height='90' viewBox='0 0 120 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23fff' fill-rule='evenodd' d='M51 13a32 32 0 1 0 0 64 34 34 0 1 1 0-64z'/%3E%3Cpath fill='%23fff' d='M86 27l5.2 13.2 14.1-1.1-10.9 9 5.4 13.1L87.9 53.6 77.1 62.8l3.5-13.7-12-7.5 14.1-.9z'/%3E%3C/svg%3E");
 }
 
-.c-deep-green ~ .sym-crescent::before,
-.sym-crescent::before {
-  box-shadow: 13px 0 0 currentColor;
-}
-
-.sym-crescent {
-  background:
-    radial-gradient(circle at 38% 50%, transparent 0 28%, #fff 29% 43%, transparent 44%),
-    linear-gradient(72deg, transparent 0 64%, #fff 65% 72%, transparent 73%);
+.sym-yellow-crescent {
+  background: center / contain no-repeat url("data:image/svg+xml,%3Csvg width='120' height='90' viewBox='0 0 120 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23ffd735' fill-rule='evenodd' d='M54 13a32 32 0 1 0 0 64 34 34 0 1 1 0-64z'/%3E%3C/svg%3E");
 }
 
 .sym-taegeuk {
