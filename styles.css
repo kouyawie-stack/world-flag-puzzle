@@ -1286,15 +1286,15 @@ button {
 }
 
 .sym-crescent {
-  background: center / contain no-repeat url("data:image/svg+xml,%3Csvg width='120' height='90' viewBox='0 0 120 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23fff' fill-rule='evenodd' d='M54 13a32 32 0 1 0 0 64 34 34 0 1 1 0-64z'/%3E%3C/svg%3E");
+  background: center / contain no-repeat url("data:image/svg+xml,%3Csvg width='120' height='90' viewBox='0 0 120 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cmask id='m'%3E%3Crect width='120' height='90' fill='black'/%3E%3Ccircle cx='45' cy='45' r='30' fill='white'/%3E%3Ccircle cx='57' cy='45' r='25' fill='black'/%3E%3C/mask%3E%3Crect width='120' height='90' fill='%23fff' mask='url(%23m)'/%3E%3C/svg%3E");
 }
 
 .sym-crescent-star {
-  background: center / contain no-repeat url("data:image/svg+xml,%3Csvg width='120' height='90' viewBox='0 0 120 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23fff' fill-rule='evenodd' d='M51 13a32 32 0 1 0 0 64 34 34 0 1 1 0-64z'/%3E%3Cpath fill='%23fff' d='M86 27l5.2 13.2 14.1-1.1-10.9 9 5.4 13.1L87.9 53.6 77.1 62.8l3.5-13.7-12-7.5 14.1-.9z'/%3E%3C/svg%3E");
+  background: center / contain no-repeat url("data:image/svg+xml,%3Csvg width='120' height='90' viewBox='0 0 120 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cmask id='m'%3E%3Crect width='120' height='90' fill='black'/%3E%3Ccircle cx='43' cy='45' r='30' fill='white'/%3E%3Ccircle cx='55' cy='45' r='25' fill='black'/%3E%3C/mask%3E%3Crect width='120' height='90' fill='%23fff' mask='url(%23m)'/%3E%3Cpath fill='%23fff' d='M86 27l4.9 12.5 13.4-.6-10.5 8.2 4.7 12.6-11.2-7.4-10.5 8.2 3.6-13-11.2-7.4 13.4-.6z'/%3E%3C/svg%3E");
 }
 
 .sym-yellow-crescent {
-  background: center / contain no-repeat url("data:image/svg+xml,%3Csvg width='120' height='90' viewBox='0 0 120 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23ffd735' fill-rule='evenodd' d='M54 13a32 32 0 1 0 0 64 34 34 0 1 1 0-64z'/%3E%3C/svg%3E");
+  background: center / contain no-repeat url("data:image/svg+xml,%3Csvg width='120' height='90' viewBox='0 0 120 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cmask id='m'%3E%3Crect width='120' height='90' fill='black'/%3E%3Ccircle cx='45' cy='45' r='30' fill='white'/%3E%3Ccircle cx='57' cy='45' r='25' fill='black'/%3E%3C/mask%3E%3Crect width='120' height='90' fill='%23ffd735' mask='url(%23m)'/%3E%3C/svg%3E");
 }
 
 .sym-taegeuk {
@@ -1434,6 +1434,7 @@ button {
 
 .nordic-white,
 .nordic-blue,
+.nordic-blue-inner,
 .nordic-yellow,
 .nordic-red {
   background:
@@ -1441,11 +1442,21 @@ button {
     linear-gradient(0deg, transparent 0 42%, currentColor 42% 58%, transparent 58%);
 }
 
+.nordic-blue-inner {
+  background:
+    linear-gradient(90deg, transparent 0 32%, currentColor 32% 38%, transparent 38%),
+    linear-gradient(0deg, transparent 0 46%, currentColor 46% 54%, transparent 54%);
+}
+
 .nordic-white {
   color: #fff;
 }
 
 .nordic-blue {
+  color: #1756b8;
+}
+
+.nordic-blue-inner {
   color: #1756b8;
 }
 
