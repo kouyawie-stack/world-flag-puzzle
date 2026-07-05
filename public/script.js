@@ -54,6 +54,7 @@ const artLabels = {
   "sym-trigram-b": "右上の黒い線",
   "sym-trigram-c": "左下の黒い線",
   "sym-trigram-d": "右下の黒い線",
+  "korea-trigrams": "四隅の黒い線",
   "shape-diamond-yellow": "黄色いひし形",
   "shape-triangle-white": "白い三角",
   "shape-triangle-blue": "青い三角",
@@ -152,11 +153,8 @@ const countryPlans = [
     english: "Korea",
     pieces: [
       ...field("c-white"),
-      ...center("sym-taegeuk", 20),
-      piece("sym-trigram-a", 20, 18, 16, 18, 2),
-      piece("sym-trigram-b", 64, 18, 16, 18, 2),
-      piece("sym-trigram-c", 20, 64, 16, 18, 2),
-      piece("sym-trigram-d", 64, 64, 16, 18, 2),
+      ...center("sym-taegeuk", 24),
+      piece("korea-trigrams", 0, 0, 100, 100, 2),
     ],
   },
   { country: "アルゼンチン", english: "Argentina", pieces: [...h3("c-sky", "c-white", "c-sky"), ...center("sym-sun", 14)] },
@@ -269,19 +267,26 @@ function ensureAudio() {
     audioContext = new AudioContextClass();
     masterGain = audioContext.createGain();
     musicGain = audioContext.createGain();
-    masterGain.gain.value = 0.34;
-    musicGain.gain.value = 0.2;
+    masterGain.gain.value = 0.52;
+    musicGain.gain.value = 0.72;
     musicGain.connect(masterGain);
     masterGain.connect(audioContext.destination);
   }
 
-  if (audioContext.state === "suspended") {
-    audioResumePromise = audioContext.resume().then(() => {
-      audioUnlocked = true;
-      startMusic();
-    }).catch(() => {
-      audioUnlocked = false;
-    });
+  if (audioContext.state !== "running") {
+    if (!audioResumePromise) {
+      audioResumePromise = audioContext.resume()
+        .then(() => {
+          audioUnlocked = audioContext.state === "running";
+          if (audioUnlocked) startMusic();
+        })
+        .catch(() => {
+          audioUnlocked = false;
+        })
+        .finally(() => {
+          audioResumePromise = undefined;
+        });
+    }
   } else {
     audioUnlocked = true;
   }
@@ -290,14 +295,20 @@ function ensureAudio() {
   return true;
 }
 
-function unlockAudioFromGesture() {
+function unlockAudioFromGesture(withFeedback = false) {
   if (!soundEnabled) return;
   ensureAudio();
 
+  const playUnlockFeedback = () => {
+    if (withFeedback && audioContext && audioUnlocked) {
+      playTone(880, audioContext.currentTime, 0.025, "sine", 0.02);
+    }
+  };
+
   if (audioResumePromise) {
-    audioResumePromise.then(() => playTone(880, audioContext.currentTime, 0.025, "sine", 0.02));
+    audioResumePromise.then(playUnlockFeedback);
   } else if (audioUnlocked) {
-    playTone(880, audioContext.currentTime, 0.025, "sine", 0.02);
+    playUnlockFeedback();
   }
 }
 
@@ -320,9 +331,9 @@ function playMusicStep() {
   const notes = [392, 493.88, 587.33, 659.25, 587.33, 493.88, 440, 523.25];
   const bass = [196, 196, 246.94, 246.94, 220, 220, 261.63, 261.63];
   const now = audioContext.currentTime;
-  playTone(notes[musicStep % notes.length], now, 0.16, "triangle", 0.06, musicGain);
+  playTone(notes[musicStep % notes.length], now, 0.18, "triangle", 0.16, musicGain);
   if (musicStep % 2 === 0) {
-    playTone(bass[musicStep % bass.length], now, 0.2, "sine", 0.035, musicGain);
+    playTone(bass[musicStep % bass.length], now, 0.22, "sine", 0.09, musicGain);
   }
   musicStep += 1;
 }
@@ -377,9 +388,8 @@ function toggleSound() {
   updateSoundButton();
 
   if (soundEnabled) {
-    unlockAudioFromGesture();
+    unlockAudioFromGesture(true);
     audioResumePromise?.then(() => playSfx("button"));
-    if (audioUnlocked) playSfx("button");
   } else {
     stopMusic();
   }
@@ -751,8 +761,9 @@ closeRulesButton.addEventListener("click", () => {
   rulesDialog.close();
 });
 soundToggle.addEventListener("click", toggleSound);
-document.addEventListener("pointerdown", unlockAudioFromGesture, { capture: true, once: true });
-document.addEventListener("touchstart", unlockAudioFromGesture, { capture: true, once: true, passive: true });
+document.addEventListener("pointerdown", () => unlockAudioFromGesture(false), { capture: true });
+document.addEventListener("touchstart", () => unlockAudioFromGesture(false), { capture: true, passive: true });
+document.addEventListener("click", () => unlockAudioFromGesture(false), { capture: true });
 
 updateSoundButton();
 renderHome();

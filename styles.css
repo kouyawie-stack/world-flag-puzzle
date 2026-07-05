@@ -1298,13 +1298,11 @@ button {
 }
 
 .sym-taegeuk {
-  overflow: hidden;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 50% 25%, #0752b8 0 25%, transparent 26%),
-    radial-gradient(circle at 50% 75%, #e62d44 0 25%, transparent 26%),
-    linear-gradient(180deg, #e62d44 0 50%, #0752b8 50%);
-  transform: rotate(-28deg);
+  background: center / contain no-repeat url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg transform='rotate(-33 60 60)'%3E%3CclipPath id='c'%3E%3Ccircle cx='60' cy='60' r='47'/%3E%3C/clipPath%3E%3Cg clip-path='url(%23c)'%3E%3Crect width='120' height='60' fill='%23cd2e3a'/%3E%3Crect y='60' width='120' height='60' fill='%230047a0'/%3E%3Ccircle cx='60' cy='36.5' r='23.5' fill='%230047a0'/%3E%3Ccircle cx='60' cy='83.5' r='23.5' fill='%23cd2e3a'/%3E%3C/g%3E%3Ccircle cx='60' cy='60' r='47' fill='none' stroke='rgba(0,0,0,.08)' stroke-width='1.5'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.korea-trigrams {
+  background: center / contain no-repeat url("data:image/svg+xml,%3Csvg width='360' height='240' viewBox='0 0 360 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cg id='solid'%3E%3Crect x='-32' y='-19' width='64' height='8' rx='1'/%3E%3Crect x='-32' y='-4' width='64' height='8' rx='1'/%3E%3Crect x='-32' y='11' width='64' height='8' rx='1'/%3E%3C/g%3E%3Cg id='broken'%3E%3Crect x='-32' y='-19' width='25' height='8' rx='1'/%3E%3Crect x='7' y='-19' width='25' height='8' rx='1'/%3E%3Crect x='-32' y='-4' width='25' height='8' rx='1'/%3E%3Crect x='7' y='-4' width='25' height='8' rx='1'/%3E%3Crect x='-32' y='11' width='25' height='8' rx='1'/%3E%3Crect x='7' y='11' width='25' height='8' rx='1'/%3E%3C/g%3E%3Cg id='ri'%3E%3Crect x='-32' y='-19' width='64' height='8' rx='1'/%3E%3Crect x='-32' y='-4' width='25' height='8' rx='1'/%3E%3Crect x='7' y='-4' width='25' height='8' rx='1'/%3E%3Crect x='-32' y='11' width='64' height='8' rx='1'/%3E%3C/g%3E%3Cg id='gam'%3E%3Crect x='-32' y='-19' width='25' height='8' rx='1'/%3E%3Crect x='7' y='-19' width='25' height='8' rx='1'/%3E%3Crect x='-32' y='-4' width='64' height='8' rx='1'/%3E%3Crect x='-32' y='11' width='25' height='8' rx='1'/%3E%3Crect x='7' y='11' width='25' height='8' rx='1'/%3E%3C/g%3E%3C/defs%3E%3Cg fill='%23111'%3E%3Cuse href='%23solid' transform='translate(96 62) rotate(-33)'/%3E%3Cuse href='%23ri' transform='translate(264 62) rotate(33)'/%3E%3Cuse href='%23gam' transform='translate(96 178) rotate(33)'/%3E%3Cuse href='%23broken' transform='translate(264 178) rotate(-33)'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 .sym-trigram-a,
