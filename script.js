@@ -271,14 +271,23 @@ function ensureAudio() {
     musicGain.gain.value = 0.72;
     musicGain.connect(masterGain);
     masterGain.connect(audioContext.destination);
+    const handleAudioStateChange = () => {
+      audioUnlocked = audioContext.state === "running";
+      if (audioUnlocked) startMusic();
+    };
+    if (audioContext.addEventListener) {
+      audioContext.addEventListener("statechange", handleAudioStateChange);
+    } else {
+      audioContext.onstatechange = handleAudioStateChange;
+    }
   }
 
   if (audioContext.state !== "running") {
     if (!audioResumePromise) {
       audioResumePromise = audioContext.resume()
         .then(() => {
-          audioUnlocked = audioContext.state === "running";
-          if (audioUnlocked) startMusic();
+          audioUnlocked = true;
+          startMusic();
         })
         .catch(() => {
           audioUnlocked = false;
@@ -313,7 +322,8 @@ function unlockAudioFromGesture(withFeedback = false) {
 }
 
 function startMusic() {
-  if (!soundEnabled || !audioContext || !audioUnlocked || musicTimer) return;
+  if (!soundEnabled || !audioContext || musicTimer) return;
+  if (audioContext.state !== "running" && !audioUnlocked) return;
 
   playMusicStep();
   musicTimer = setInterval(playMusicStep, 480);
@@ -341,7 +351,11 @@ function playMusicStep() {
 function playSfx(type) {
   if (!ensureAudio()) return;
   if (!audioUnlocked) {
-    audioResumePromise?.then(() => playSfx(type));
+    audioResumePromise?.then(() => {
+      audioUnlocked = true;
+      startMusic();
+      playSfx(type);
+    });
     return;
   }
 
@@ -478,7 +492,7 @@ function showHome() {
 }
 
 function startLevel(index, resetPoints) {
-  ensureAudio();
+  unlockAudioFromGesture(false);
   playSfx("button");
   levelIndex = index;
   if (resetPoints) points = 0;
