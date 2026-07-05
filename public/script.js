@@ -234,6 +234,8 @@ let masterGain;
 let musicGain;
 let musicTimer;
 let musicStep = 0;
+let audioUnlocked = false;
+let audioResumePromise;
 
 function ensureAudio() {
   if (!soundEnabled) return false;
@@ -252,15 +254,33 @@ function ensureAudio() {
   }
 
   if (audioContext.state === "suspended") {
-    audioContext.resume();
+    audioResumePromise = audioContext.resume().then(() => {
+      audioUnlocked = true;
+      startMusic();
+    }).catch(() => {
+      audioUnlocked = false;
+    });
+  } else {
+    audioUnlocked = true;
   }
 
-  startMusic();
+  if (audioUnlocked) startMusic();
   return true;
 }
 
+function unlockAudioFromGesture() {
+  if (!soundEnabled) return;
+  ensureAudio();
+
+  if (audioResumePromise) {
+    audioResumePromise.then(() => playTone(880, audioContext.currentTime, 0.025, "sine", 0.02));
+  } else if (audioUnlocked) {
+    playTone(880, audioContext.currentTime, 0.025, "sine", 0.02);
+  }
+}
+
 function startMusic() {
-  if (!soundEnabled || !audioContext || musicTimer) return;
+  if (!soundEnabled || !audioContext || !audioUnlocked || musicTimer) return;
 
   playMusicStep();
   musicTimer = setInterval(playMusicStep, 480);
@@ -287,6 +307,10 @@ function playMusicStep() {
 
 function playSfx(type) {
   if (!ensureAudio()) return;
+  if (!audioUnlocked) {
+    audioResumePromise?.then(() => playSfx(type));
+    return;
+  }
 
   const now = audioContext.currentTime;
   if (type === "correct") {
@@ -331,8 +355,9 @@ function toggleSound() {
   updateSoundButton();
 
   if (soundEnabled) {
-    ensureAudio();
-    playSfx("button");
+    unlockAudioFromGesture();
+    audioResumePromise?.then(() => playSfx("button"));
+    if (audioUnlocked) playSfx("button");
   } else {
     stopMusic();
   }
@@ -703,6 +728,8 @@ closeRulesButton.addEventListener("click", () => {
   rulesDialog.close();
 });
 soundToggle.addEventListener("click", toggleSound);
+document.addEventListener("pointerdown", unlockAudioFromGesture, { capture: true, once: true });
+document.addEventListener("touchstart", unlockAudioFromGesture, { capture: true, once: true, passive: true });
 
 updateSoundButton();
 renderHome();
