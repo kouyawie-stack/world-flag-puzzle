@@ -1407,6 +1407,16 @@ button {
   color: #111;
 }
 
+.jamaica-base {
+  background: conic-gradient(from 63deg at 50% 50%, #111 0 54deg, #138a57 54deg 126deg, #111 126deg 234deg, #138a57 234deg 306deg, #111 306deg 360deg);
+}
+
+.jamaica-saltire {
+  background:
+    linear-gradient(27deg, transparent 0 43%, #ffd735 43% 57%, transparent 57%),
+    linear-gradient(153deg, transparent 0 43%, #ffd735 43% 57%, transparent 57%);
+}
+
 .cross-red,
 .cross-white,
 .cross-blue,
