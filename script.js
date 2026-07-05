@@ -40,6 +40,7 @@ const artLabels = {
   "sym-sun": "太陽",
   "sym-blue-wheel": "青い車輪",
   "sym-eagle": "ワシの紋章",
+  "sym-shield": "盾の紋章",
   "spain-emblem": "スペインの紋章",
   "brazil-globe": "ブラジルの青い円",
   "portugal-emblem": "ポルトガルの紋章",
@@ -61,6 +62,7 @@ const artLabels = {
   "shape-triangle-red": "赤い三角",
   "shape-triangle-green": "緑の三角",
   "shape-triangle-black": "黒い三角",
+  "shape-triangle-yellow": "黄色い三角",
   "shape-diagonal-yellow": "黄色い斜め線",
   "shape-diagonal-white": "白い斜め線",
   "shape-diagonal-red": "赤い斜め線",
@@ -83,6 +85,7 @@ const artLabels = {
   "stars-strip": "白い星",
   "singapore-stars": "5つの白い星",
   "philippines-stars": "3つの黄色い星",
+  "sym-white-disc": "白い丸",
   "morocco-star": "緑の星",
   "script-sword": "文字と剣のしるし",
 };
@@ -131,6 +134,21 @@ const h3 = (a, b, c) => [
   piece(c, 0, 66.6, 100, 33.4, 1),
 ];
 
+const h4 = (a, b, c, d) => [
+  piece(a, 0, 0, 100, 25, 1),
+  piece(b, 0, 25, 100, 25, 1),
+  piece(c, 0, 50, 100, 25, 1),
+  piece(d, 0, 75, 100, 25, 1),
+];
+
+const h5 = (a, b, c, d, e) => [
+  piece(a, 0, 0, 100, 20, 1),
+  piece(b, 0, 20, 100, 20, 1),
+  piece(c, 0, 40, 100, 20, 1),
+  piece(d, 0, 60, 100, 20, 1),
+  piece(e, 0, 80, 100, 20, 1),
+];
+
 const h2 = (a, b) => [
   piece(a, 0, 0, 100, 50, 1),
   piece(b, 0, 50, 100, 50, 1),
@@ -153,7 +171,7 @@ const countryPlans = [
     english: "Korea",
     pieces: [
       ...field("c-white"),
-      ...center("sym-taegeuk", 24),
+      ...center("sym-taegeuk", 32),
       piece("korea-trigrams", 0, 0, 100, 100, 2),
     ],
   },
@@ -202,6 +220,33 @@ const countryPlans = [
   { country: "ケニア", english: "Kenya", pieces: [piece("c-black", 0, 0, 100, 30), piece("c-white", 0, 30, 100, 5), piece("c-red", 0, 35, 100, 30), piece("c-white", 0, 65, 100, 5), piece("c-green", 0, 70, 100, 30), ...center("sym-shield", 18)] },
   { country: "タンザニア", english: "Tanzania", pieces: [piece("tanzania-base", 0, 0, 100, 100), piece("tanzania-yellow-band", 0, 0, 100, 100, 2), piece("tanzania-black-band", 0, 0, 100, 100, 3)] },
   { country: "エチオピア", english: "Ethiopia", pieces: [...h3("c-green", "c-yellow", "c-red"), ...center("ethiopia-emblem", 20)] },
+  { country: "オーストリア", english: "Austria", pieces: h3("c-red", "c-white", "c-red") },
+  { country: "ハンガリー", english: "Hungary", pieces: h3("c-red", "c-white", "c-green") },
+  { country: "ブルガリア", english: "Bulgaria", pieces: h3("c-white", "c-green", "c-red") },
+  { country: "リトアニア", english: "Lithuania", pieces: h3("c-yellow", "c-green", "c-red") },
+  { country: "エストニア", english: "Estonia", pieces: h3("c-blue", "c-black", "c-white") },
+  { country: "アルメニア", english: "Armenia", pieces: h3("c-red", "c-blue", "c-orange") },
+  { country: "イエメン", english: "Yemen", pieces: h3("c-red", "c-white", "c-black") },
+  { country: "シリア", english: "Syria", pieces: [...h3("c-red", "c-white", "c-black"), piece("sym-green-star", 39, 41, 10, 18, 2), piece("sym-green-star", 53, 41, 10, 18, 2)] },
+  { country: "イラク", english: "Iraq", pieces: [...h3("c-red", "c-white", "c-black"), piece("script-sword", 31, 35, 38, 30, 2)] },
+  { country: "アラブ首長国連邦", english: "United Arab Emirates", pieces: [piece("c-red", 0, 0, 25, 100), piece("c-green", 25, 0, 75, 33.4), piece("c-white", 25, 33.3, 75, 33.4), piece("c-black", 25, 66.6, 75, 33.4)] },
+  { country: "クウェート", english: "Kuwait", pieces: [piece("shape-triangle-black", 0, 0, 36, 100, 2), piece("c-green", 0, 0, 100, 33.4), piece("c-white", 0, 33.3, 100, 33.4), piece("c-red", 0, 66.6, 100, 33.4)] },
+  { country: "パレスチナ", english: "Palestine", pieces: [piece("c-black", 0, 0, 100, 33.4), piece("c-white", 0, 33.3, 100, 33.4), piece("c-green", 0, 66.6, 100, 33.4), piece("shape-triangle-red", 0, 0, 42, 100, 2)] },
+  { country: "ヨルダン", english: "Jordan", pieces: [piece("c-black", 0, 0, 100, 33.4), piece("c-white", 0, 33.3, 100, 33.4), piece("c-green", 0, 66.6, 100, 33.4), piece("shape-triangle-red", 0, 0, 42, 100, 2), piece("sym-white-star", 10, 39, 12, 22, 3)] },
+  { country: "南スーダン", english: "South Sudan", pieces: [piece("c-black", 0, 0, 100, 28), piece("c-white", 0, 28, 100, 5), piece("c-red", 0, 33, 100, 34), piece("c-white", 0, 67, 100, 5), piece("c-green", 0, 72, 100, 28), piece("shape-triangle-blue", 0, 0, 42, 100, 2), piece("sym-star", 10, 39, 12, 22, 3)] },
+  { country: "イギリス", english: "United Kingdom", pieces: [...field("c-blue"), piece("shape-diagonal-white", 0, 0, 100, 100, 2), piece("shape-diagonal-red", 0, 0, 100, 100, 3), piece("cross-white", 0, 0, 100, 100, 4), piece("cross-red", 0, 0, 100, 100, 5)] },
+  { country: "ギリシャ", english: "Greece", pieces: [piece("stripe-blue-white", 0, 0, 100, 100), piece("c-blue", 0, 0, 40, 56, 2), piece("cross-white", 0, 0, 40, 56, 3)] },
+  { country: "クロアチア", english: "Croatia", pieces: [...h3("c-red", "c-white", "c-blue"), piece("sym-shield", 43, 34, 14, 32, 2)] },
+  { country: "セルビア", english: "Serbia", pieces: [...h3("c-red", "c-blue", "c-white"), piece("sym-eagle", 21, 31, 16, 34, 2)] },
+  { country: "スロバキア", english: "Slovakia", pieces: [...h3("c-white", "c-blue", "c-red"), piece("sym-shield", 22, 31, 14, 34, 2)] },
+  { country: "スロベニア", english: "Slovenia", pieces: [...h3("c-white", "c-blue", "c-red"), piece("sym-shield", 22, 18, 13, 28, 2)] },
+  { country: "コスタリカ", english: "Costa Rica", pieces: h5("c-blue", "c-white", "c-red", "c-white", "c-blue") },
+  { country: "北朝鮮", english: "North Korea", pieces: [piece("c-blue", 0, 0, 100, 16), piece("c-white", 0, 16, 100, 5), piece("c-red", 0, 21, 100, 58), piece("c-white", 0, 79, 100, 5), piece("c-blue", 0, 84, 100, 16), piece("sym-white-star", 22, 39, 14, 22, 2)] },
+  { country: "ラオス", english: "Laos", pieces: [piece("c-red", 0, 0, 100, 25), piece("c-blue", 0, 25, 100, 50), piece("c-red", 0, 75, 100, 25), ...center("sym-white-disc", 24)] },
+  { country: "ボツワナ", english: "Botswana", pieces: h5("c-sky", "c-white", "c-black", "c-white", "c-sky") },
+  { country: "ガンビア", english: "Gambia", pieces: h5("c-red", "c-white", "c-blue", "c-white", "c-green") },
+  { country: "モーリシャス", english: "Mauritius", pieces: h4("c-red", "c-blue", "c-yellow", "c-green") },
+  { country: "セーシェル", english: "Seychelles", pieces: [piece("shape-triangle-blue", 0, 0, 44, 100), piece("shape-triangle-yellow", 0, 0, 62, 100, 2), piece("shape-triangle-red", 0, 0, 78, 100, 3), piece("shape-triangle-white", 0, 0, 90, 100, 4), piece("c-green", 66, 0, 34, 100, 1)] },
 ];
 
 const levels = countryPlans
@@ -448,19 +493,23 @@ function renderHome() {
   clearInterval(timerId);
   levelList.innerHTML = "";
   renderDifficultyRoad(selectedDifficulty);
-  const targetIndex = getNextLevelIndex(selectedDifficulty);
+  const completed = isDifficultyComplete(selectedDifficulty);
+  const targetIndex = completed ? getFirstLevelIndex(selectedDifficulty) : getNextLevelIndex(selectedDifficulty);
   const level = levels[targetIndex];
   const difficulty = getDifficultyGroups().find((group) => group.key === selectedDifficulty);
   const button = document.createElement("button");
   button.className = `next-stage-card difficulty-${difficulty.key}`;
   button.type = "button";
   button.innerHTML = `
-    <span class="next-stage-kicker">NEXT PUZZLE</span>
+    <span class="next-stage-kicker">${completed ? "LEVEL CLEAR" : "NEXT PUZZLE"}</span>
     <span class="next-stage-title">${difficulty.name}</span>
-    <span class="next-stage-hint">どんな国旗かな？</span>
-    <span class="next-stage-meta">${level.time}秒 / ${level.required.length}パーツ</span>
+    <span class="next-stage-hint">${completed ? "一周クリア！もう一度あそべるよ" : "どんな国旗かな？"}</span>
+    <span class="next-stage-meta">${completed ? "最初から再挑戦" : `${level.time}秒 / ${level.required.length}パーツ`}</span>
   `;
-  button.addEventListener("click", () => startLevel(targetIndex, true));
+  button.addEventListener("click", () => {
+    if (completed) nextByDifficulty[selectedDifficulty] = 0;
+    startLevel(getNextLevelIndex(selectedDifficulty), true);
+  });
   levelList.append(button);
 }
 
@@ -471,7 +520,7 @@ function renderDifficultyRoad(activeKey) {
     item.type = "button";
     const isActive = group.key === activeKey;
     item.className = `road-item${isActive ? " active" : ""}`;
-    item.textContent = group.name;
+    item.textContent = `${isDifficultyComplete(group.key) ? "✓ " : ""}${group.name}`;
     item.addEventListener("click", () => {
       selectedDifficulty = group.key;
       renderHome();
@@ -589,7 +638,6 @@ function choosePart(button) {
     if (placed.size === level.required.length) {
       solved = true;
       clearInterval(timerId);
-      unlockNextLevel();
       const timeBonus = Math.ceil(remaining / 5);
       lastAward = level.required.length + timeBonus;
       points += timeBonus;
@@ -660,11 +708,11 @@ function finishTimeUp() {
 
 function showResult(success) {
   if (success) playSfx("button");
-  const isFinalLevel = levelIndex === levels.length - 1;
+  const isFinalLevel = isLastInDifficulty(levelIndex);
   resultTitle.textContent = success ? "クリア！" : "タイムアップ";
   if (success && isFinalLevel) {
     resultTitle.textContent = `ランク ${getRank(points)}`;
-    resultText.textContent = `最後までクリア！合計 ${points} ポイントです。`;
+    resultText.textContent = `${getDifficultyLabel(levels[levelIndex].required.length)}を一周クリア！合計 ${points} ポイントです。`;
   } else {
     resultText.textContent = success
       ? `${levels[levelIndex].country} の国旗が完成しました。今回 +${lastAward} ポイント`
@@ -678,7 +726,12 @@ function nextLevel() {
   const completed = solved && placed.size === levels[levelIndex].required.length;
   resultDialog.close();
   if (completed) {
+    const finishedDifficulty = isLastInDifficulty(levelIndex);
     advanceDifficultyProgress(levelIndex);
+    if (finishedDifficulty) {
+      showHome();
+      return;
+    }
     startLevel(getNextLevelIndex(selectedDifficulty), false);
     return;
   }
@@ -693,26 +746,43 @@ function getRank(score) {
 }
 
 function unlockNextLevel() {
-  advanceDifficultyProgress(levelIndex);
+  return;
 }
 
 function getNextLevelIndex(difficultyKey) {
-  const groupLevels = levels
-    .map((level, index) => ({ level, index }))
-    .filter((item) => getDifficultyKey(item.level.required.length) === difficultyKey);
-  const groupPosition = nextByDifficulty[difficultyKey] % groupLevels.length;
+  const groupLevels = getDifficultyLevelItems(difficultyKey);
+  const groupPosition = Math.min(nextByDifficulty[difficultyKey], groupLevels.length - 1);
   return groupLevels[groupPosition].index;
+}
+
+function getFirstLevelIndex(difficultyKey) {
+  return getDifficultyLevelItems(difficultyKey)[0].index;
 }
 
 function advanceDifficultyProgress(index) {
   const difficultyKey = getDifficultyKey(levels[index].required.length);
-  const groupLevels = levels
-    .map((level, levelIndex) => ({ level, index: levelIndex }))
-    .filter((item) => getDifficultyKey(item.level.required.length) === difficultyKey);
+  const groupLevels = getDifficultyLevelItems(difficultyKey);
   const currentPosition = groupLevels.findIndex((item) => item.index === index);
   if (currentPosition >= 0) {
-    nextByDifficulty[difficultyKey] = (currentPosition + 1) % groupLevels.length;
+    nextByDifficulty[difficultyKey] = Math.min(currentPosition + 1, groupLevels.length);
   }
+}
+
+function getDifficultyLevelItems(difficultyKey) {
+  return levels
+    .map((level, index) => ({ level, index }))
+    .filter((item) => getDifficultyKey(item.level.required.length) === difficultyKey);
+}
+
+function isDifficultyComplete(difficultyKey) {
+  const groupLevels = getDifficultyLevelItems(difficultyKey);
+  return groupLevels.length > 0 && nextByDifficulty[difficultyKey] >= groupLevels.length;
+}
+
+function isLastInDifficulty(index) {
+  const difficultyKey = getDifficultyKey(levels[index].required.length);
+  const groupLevels = getDifficultyLevelItems(difficultyKey);
+  return groupLevels[groupLevels.length - 1]?.index === index;
 }
 
 function getDifficultyLabel(partsCount) {
@@ -721,17 +791,17 @@ function getDifficultyLabel(partsCount) {
 
 function getDifficultyKey(partsCount) {
   if (partsCount <= 2) return "easy";
-  if (partsCount <= 4) return "normal";
-  if (partsCount <= 6) return "hard";
+  if (partsCount <= 3) return "normal";
+  if (partsCount <= 4) return "hard";
   return "master";
 }
 
 function getDifficultyGroups() {
   return [
     { key: "easy", name: "EASY", note: "2パーツ" },
-    { key: "normal", name: "NORMAL", note: "3〜4パーツ" },
-    { key: "hard", name: "HARD", note: "5〜6パーツ" },
-    { key: "master", name: "MASTER", note: "7パーツ以上" },
+    { key: "normal", name: "NORMAL", note: "3パーツ" },
+    { key: "hard", name: "HARD", note: "4パーツ" },
+    { key: "master", name: "MASTER", note: "5パーツ以上" },
   ];
 }
 
@@ -754,7 +824,10 @@ function shuffle(items) {
     .map((item) => item.value);
 }
 
-startButton.addEventListener("click", () => startLevel(getNextLevelIndex(selectedDifficulty), true));
+startButton.addEventListener("click", () => {
+  if (isDifficultyComplete(selectedDifficulty)) nextByDifficulty[selectedDifficulty] = 0;
+  startLevel(getNextLevelIndex(selectedDifficulty), true);
+});
 homeButton.addEventListener("click", showHome);
 continueButton.addEventListener("click", () => showResult(true));
 nextButton.addEventListener("click", nextLevel);
